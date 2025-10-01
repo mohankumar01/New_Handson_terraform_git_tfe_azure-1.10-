@@ -76,7 +76,7 @@ resource "azurerm_network_security_group" "nsg_app" {
   name                = "nsg-app-terra-git-demo"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-
+ 
 }
 
 # Allow traffic from web subnet to app (example port 8080)
@@ -88,7 +88,7 @@ resource "azurerm_network_security_rule" "app_allow_from_web" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_ranges     = ["8080"]                   # change to your app port(s)
-  source_address_prefix       = azurerm_subnet.web.address_prefixes[0] # uses web subnet CIDR
+  source_address_prefix       = azurerm_subnet.web-sn.address_prefixes[0] # uses web subnet CIDR
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.rg.name
   network_security_group_name = azurerm_network_security_group.nsg_app.name
